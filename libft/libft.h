@@ -26,5 +26,8 @@ size_t	printf_putnbr(int n);
 size_t	printf_putnbr_unsig(unsigned int n);
 size_t	printf_puthex(unsigned long n, const char base_specifier);
 size_t	printf_putptr(va_list args, char c);
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

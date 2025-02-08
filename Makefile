@@ -5,14 +5,22 @@ CLIENT = client
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
+INLUDES = minitalk.h
+
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 all:
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
-	$(CC) $(CFLAGS) server.c -o $(SERVER) $(LIBFT)
-	$(CC) $(CFLAGS) client.c -o $(CLIENT) $(LIBFT)
+	$(CC) $(CFLAGS) server.c -o $(SERVER) $(INLUDES) $(LIBFT)
+	$(CC) $(CFLAGS) client.c -o $(CLIENT) $(INLUDES) $(LIBFT)
 	@echo "Server And Client Are Ready!"
+
+bonus:
+	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
+	$(CC) $(CFLAGS) server_bonus.c -o $(SERVER) $(INLUDES) $(LIBFT)
+	$(CC) $(CFLAGS) client_bonus.c -o $(CLIENT) $(INLUDES) $(LIBFT)
+	@echo "Server And Client Are Ready! - Bonus"
 
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory
@@ -22,6 +30,6 @@ fclean: clean
 	@rm -f $(SERVER) $(CLIENT)
 	@echo "Server and Client Have Been Cleaned Successfully"
 
-re: fclean all
+re: fclean bonus all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re

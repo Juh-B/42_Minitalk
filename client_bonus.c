@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jcosta-b <jcosta-b@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 11:31:15 by jcosta-b          #+#    #+#             */
-/*   Updated: 2025/01/31 18:51:55 by jcosta-b         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minitalk.h"
 
 static int	msg_received = 0;
@@ -62,7 +50,8 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	signal(SIGUSR1, wait_signal);
-  // ft_printf("Ok.\n");
+  ft_printf("Mensage received.\n");
 	send_message(server_pid, argv[2], ft_strlen(argv[2]) + 1);
 	return (0);
 }
+

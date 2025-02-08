@@ -2,7 +2,8 @@
 NAME = libft.a
 
 SRC = \
-	ft_atoi.c ft_isdigit.c ft_printf.c\
+	ft_atoi.c ft_isdigit.c ft_strlen.c ft_strdup.c\
+	ft_strjoin.c ft_printf.c\
 	printf_putchar.c printf_putstr.c\
 	printf_putnbr.c printf_putnbr_unsig.c\
 	printf_puthex.c printf_putptr.c

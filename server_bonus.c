@@ -58,7 +58,7 @@ static void	ft_handle_binary(int signal, siginfo_t *info, void *context)
 
 int	main(void)
 {
-	struct sigaction  sa;
+	struct sigaction	sa;
 
   ft_printf("Welcome to Minitalk Server!\n--- PID: %d ---\n", getpid());
 	sa.sa_sigaction = ft_handle_binary;
@@ -72,3 +72,4 @@ int	main(void)
 	}
 	return (0);
 }
+
