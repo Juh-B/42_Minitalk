@@ -1,4 +1,3 @@
-# Project name
 SERVER = server
 CLIENT = client
 
@@ -12,14 +11,14 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 all:
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
-	$(CC) $(CFLAGS) server.c -o $(SERVER) $(INLUDES) $(LIBFT)
-	$(CC) $(CFLAGS) client.c -o $(CLIENT) $(INLUDES) $(LIBFT)
+	$(CC) $(CFLAGS) server.c -o $(SERVER) $(LIBFT)
+	$(CC) $(CFLAGS) client.c -o $(CLIENT) $(LIBFT)
 	@echo "Server And Client Are Ready!"
 
 bonus:
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
-	$(CC) $(CFLAGS) server_bonus.c -o $(SERVER) $(INLUDES) $(LIBFT)
-	$(CC) $(CFLAGS) client_bonus.c -o $(CLIENT) $(INLUDES) $(LIBFT)
+	$(CC) $(CFLAGS) server_bonus.c -o $(SERVER) $(LIBFT)
+	$(CC) $(CFLAGS) client_bonus.c -o $(CLIENT) $(LIBFT)
 	@echo "Server And Client Are Ready! - Bonus"
 
 clean:

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcosta-b <jcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/10 11:05:22 by jcosta-b          #+#    #+#             */
+/*   Updated: 2025/02/10 11:11:15 by jcosta-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
-static t_message	msg_received = {0, 0};
+static t_message	g_msg = {0, 0};
 
 static void	ft_assemble_msg(void)
 {
@@ -8,33 +20,33 @@ static void	ft_assemble_msg(void)
 	char	c;
 
 	updated_msg = NULL;
-	c = (char)msg_received.c;
-	if (msg_received.msg != NULL)
+	c = (char)g_msg.c;
+	if (g_msg.msg != NULL)
 	{
-		updated_msg = ft_strjoin(msg_received.msg, &c);
-		free(msg_received.msg);
+		updated_msg = ft_strjoin(g_msg.msg, &c);
+		free(g_msg.msg);
 	}
 	else
 		updated_msg = ft_strdup(&c);
 	if (updated_msg == NULL)
 		exit(EXIT_FAILURE);
-	msg_received.msg = updated_msg;
+	g_msg.msg = updated_msg;
 }
 
 static void	ft_print_message(void)
 {
-	if (msg_received.c == '\0')
+	if (g_msg.c == '\0')
 	{
-		if (msg_received.msg != NULL)
-			ft_printf("%s\n", msg_received.msg);
+		if (g_msg.msg != NULL)
+			ft_printf("%s\n", g_msg.msg);
 		else
 			ft_printf("\n");
-		free(msg_received.msg);
-		msg_received.msg = NULL;
+		free(g_msg.msg);
+		g_msg.msg = NULL;
 	}
 	else
 		ft_assemble_msg();
-	msg_received.c = 0;
+	g_msg.c = 0;
 }
 
 static void	ft_handle_binary(int signal, siginfo_t *info, void *context)
@@ -43,9 +55,9 @@ static void	ft_handle_binary(int signal, siginfo_t *info, void *context)
 
 	(void)context;
 	if (signal == SIGUSR1)
-		msg_received.c = (msg_received.c << 1) | 1;
+		g_msg.c = (g_msg.c << 1) | 1;
 	else if (signal == SIGUSR2)
-		msg_received.c = (msg_received.c << 1);
+		g_msg.c = (g_msg.c << 1);
 	bits++;
 	if (bits == 8)
 	{
@@ -60,7 +72,7 @@ int	main(void)
 {
 	struct sigaction	sa;
 
-  ft_printf("Welcome to Minitalk Server!\n--- PID: %d ---\n", getpid());
+	ft_printf("Welcome to Minitalk Server!\n--- PID: %d ---\n", getpid());
 	sa.sa_sigaction = ft_handle_binary;
 	sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
@@ -72,4 +84,3 @@ int	main(void)
 	}
 	return (0);
 }
-

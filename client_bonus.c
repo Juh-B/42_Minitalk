@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcosta-b <jcosta-b@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/10 11:04:24 by jcosta-b          #+#    #+#             */
+/*   Updated: 2025/02/10 11:25:05 by jcosta-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
-static int	msg_received = 0;
+static int	g_msg = 0;
 
 static void	wait_signal(int signal)
 {
 	if (signal == SIGUSR1)
-		msg_received = 1;
+		g_msg = 1;
 }
 
 static void	send_message(unsigned int server_pid, char *message, int len)
 {
-	int		bits;
-	int		char_index;
+	int	bits;
+	int	char_index;
 
 	char_index = 0;
 	while (char_index < len)
@@ -25,9 +37,9 @@ static void	send_message(unsigned int server_pid, char *message, int len)
 				kill(server_pid, SIGUSR2);
 			bits++;
 			usleep(1000);
-			while (msg_received == 0)
+			while (g_msg == 0)
 				pause();
-			msg_received = 0;
+			g_msg = 0;
 		}
 		char_index++;
 	}
@@ -50,8 +62,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	signal(SIGUSR1, wait_signal);
-  ft_printf("Mensage received.\n");
+	ft_printf("Mensage received.\n");
 	send_message(server_pid, argv[2], ft_strlen(argv[2]) + 1);
 	return (0);
 }
-
