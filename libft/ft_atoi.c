@@ -6,14 +6,11 @@
 /*   By: jcosta-b <jcosta-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:37:25 by jcosta-b          #+#    #+#             */
-/*   Updated: 2024/10/30 17:09:45 by jcosta-b         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:49:33 by jcosta-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-// converts the initial portion of the string pointed to by str to int.
-// Accept spaces at the beggin, sign and stop when can't find number.
 
 int	ft_atoi(const char *nptr)
 {
